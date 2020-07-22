@@ -37,15 +37,17 @@ public class RepoReleases extends AppCompatActivity {
         TextView name = findViewById(R.id.releases_repo_name);
         name.setText(repo.getRepo());
 
-        String URL = "https://api.github.com/repos/" + repo.getRepo() + "/releases";
-        RequestsUtil.request(URL, (isSuccess, response) -> {
-            if(!isSuccess){
-                Logger.error("Request failed with error code " + response);
+        fillList(repo);
+    }
+
+    private void fillList(Repo repo){
+        RequestsUtil.request("https://api.github.com/repos/" + repo.getRepo() + "/releases",
+                (isSuccess, response) -> {
+            if(!isSuccess || response == null){
                 Toast.makeText(this, R.string.failed, Toast.LENGTH_SHORT).show();
                 finish();
                 return;
             }
-            Logger.debug("Received response " + response);
             ArrayList<RepoRelease> releases = new ArrayList<>();
             try {
                 JSONArray array = new JSONArray(response);
@@ -56,7 +58,6 @@ public class RepoReleases extends AppCompatActivity {
                     release.setTag((String) object.get("tag_name"));
                     release.setAssets((JSONArray) object.get("assets"));
                     releases.add(release);
-                    Logger.debug("Release length: " + releases.size());
                 }
 
                 ArrayAdapter<RepoRelease> adapter = new ReleaseAdapter(this, releases);

@@ -3,7 +3,7 @@ package me.micrusa.githubstats.objects.realm;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class User extends RealmObject {
+public class User extends RealmObject implements Cachable {
     @PrimaryKey
     private String id;
 

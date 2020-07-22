@@ -14,16 +14,8 @@ import me.micrusa.githubstats.utils.utils;
 public class RepoData extends StatsData {
 
     public RepoData(final Repo repo) {
-
-        if(repo.getCachedResponse() != null && System.currentTimeMillis() - repo.getLatestCache() <= utils.getCacheTime()){
-            Logger.debug("Using cached data");
-            try {
-                response = new JSONObject(repo.getCachedResponse());
-            } catch(JSONException ignored) {}
-            success = true;
-            runAll();
-            return;
-        }
+        super(repo);
+        if(response != null) return;
 
         String url = "https://api.github.com/repos/" + repo.getRepo();
 

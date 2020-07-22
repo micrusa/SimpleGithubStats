@@ -14,15 +14,8 @@ import me.micrusa.githubstats.utils.utils;
 public class UserData extends StatsData {
 
     public UserData(final User user){
-        if(user.getCachedResponse() != null  && System.currentTimeMillis() - user.getLatestCache() <= utils.getCacheTime()){
-            Logger.debug("Using cached data");
-            try {
-                response = new JSONObject(user.getCachedResponse());
-            } catch(JSONException ignored) {}
-            success = true;
-            runAll();
-            return;
-        }
+        super(user);
+        if(response != null) return;
 
         String url = "https://api.github.com/users/" + user.getName();
 

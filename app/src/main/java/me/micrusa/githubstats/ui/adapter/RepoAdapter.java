@@ -23,6 +23,8 @@ public class RepoAdapter extends ArrayAdapter<Repo> {
         super(context, 0, repos);
     }
 
+    private TextView name, stars, issues, forks, watchers;
+
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -32,18 +34,14 @@ public class RepoAdapter extends ArrayAdapter<Repo> {
         if (convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_repo, parent, false);
 
-        TextView name = convertView.findViewById(R.id.repo_name);
+        init(convertView);
+
         name.setText(repo.getRepo());
 
         RepoData data = new RepoData(repo);
-
-        TextView stars = convertView.findViewById(R.id.repo_stars);
         data.setStars(stars);
-        TextView issues = convertView.findViewById(R.id.repo_issues);
         data.setIssues(issues);
-        TextView forks = convertView.findViewById(R.id.repo_forks);
         data.setForks(forks);
-        TextView watchers = convertView.findViewById(R.id.repo_watchers);
         data.setWatchers(watchers);
 
         convertView.setOnLongClickListener(view -> {
@@ -63,6 +61,14 @@ public class RepoAdapter extends ArrayAdapter<Repo> {
         });
 
         return convertView;
+    }
+
+    private void init(View convertView){
+        name = convertView.findViewById(R.id.repo_name);
+        stars = convertView.findViewById(R.id.repo_stars);
+        issues = convertView.findViewById(R.id.repo_issues);
+        forks = convertView.findViewById(R.id.repo_forks);
+        watchers = convertView.findViewById(R.id.repo_watchers);
     }
 
 }

@@ -10,6 +10,8 @@ import org.tinylog.Logger;
 import java.util.ArrayList;
 
 import io.realm.RealmObject;
+import me.micrusa.githubstats.objects.realm.Cachable;
+import me.micrusa.githubstats.utils.utils;
 
 public abstract class StatsData {
 
@@ -17,6 +19,17 @@ public abstract class StatsData {
     protected JSONObject response;
     protected int errorCode;
     protected ArrayList<Runnable> runOnResponse = new ArrayList<>();
+
+    protected StatsData(Cachable cachable){
+        if(cachable.getCachedResponse() != null  && System.currentTimeMillis() - cachable.getLatestCache() <= utils.getCacheTime()){
+            Logger.debug("Using cached data");
+            try {
+                response = new JSONObject(cachable.getCachedResponse());
+            } catch(JSONException ignored) {}
+            success = true;
+            runAll();
+        }
+    }
 
     public boolean exists(){
         return errorCode != 404;
