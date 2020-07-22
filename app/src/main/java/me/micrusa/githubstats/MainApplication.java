@@ -9,12 +9,19 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class MainApplication extends Application {
+  
+  private static Application mApp;
+  
+  public static Application getApp(){
+    return mApp;
+  }
 
     @Override
     public void onCreate() {
         super.onCreate();
         setupRealm();
         setupEasyprefs();
+        mApp = this;
     }
 
     private void setupRealm(){
