@@ -1,0 +1,29 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SeekBarPreference
+        app:key="cachetime"
+        app:showSeekBarValue="true"
+        app:defaultValue="3600"
+        app:adjustable="true"
+        app:min="30"
+        android:max="360000"
+        app:summary="@string/cachetimesum"
+        app:title="@string/cachetime"
+        app:updatesContinuously="true" />
+
+    <SwitchPreference
+        app:key="checkupdatestart"
+        app:defaultValue="true"
+        app:title="@string/checkupdatestart"/>
+
+    <Preference
+        app:key="checkupdate"
+        app:title="@string/checkupdate"/>
+
+    <Preference
+        app:key="info"
+        app:title="@string/appinfo" />
+
+</PreferenceScreen>

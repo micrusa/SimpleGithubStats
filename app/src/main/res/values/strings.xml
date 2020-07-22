@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Github Stats</string>
+    <string name="users">Users</string>
+    <string name="repos">Repositories</string>
+    <string name="stars">Stars</string>
+    <string name="watchers">Watchers</string>
+    <string name="issues">Issues</string>
+    <string name="forks">Forks</string>
+    <string name="downloads">Downloads</string>
+    <string name="commits">Commits</string>
+    <string name="followers">Followers</string>
+    <string name="username">Username</string>
+    <string name="repo">Repository</string>
+    <string name="save">Save</string>
+    <string name="invalidobject">Invalid repo/user!</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="cachetime">Cache time</string>
+    <string name="cachetimesum">Time in seconds before calling github API for new values. Low values can trigger rate-limiter</string>
+    <string name="settings">Settings</string>
+    <string name="update">New update available! $v, download it on github!</string>
+    <string name="noupdate">No updates available</string>
+    <string name="updatefail">Failed to check for updates</string>
+    <string name="checkupdate">Check for updates now</string>
+    <string name="checkupdatestart">Check for updates on startup</string>
+    <string name="appinfo">App info</string>
+    <string name="failed">Failed to get data!</string>
+    <string name="releases">$r\'s releases</string>
+    <string name="tag">Tag</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_users"
+        android:icon="@drawable/round_person_black_24dp"
+        android:title="@string/users" />
+
+    <item
+        android:id="@+id/navigation_repos"
+        android:icon="@drawable/baseline_book_black_24dp"
+        android:title="@string/repos" />
+
+</menu>

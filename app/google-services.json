@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "349329437799",
+    "firebase_url": "https://githubstats-1.firebaseio.com",
+    "project_id": "githubstats-1",
+    "storage_bucket": "githubstats-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349329437799:android:06f50a1d2839a55d1410c2",
+        "android_client_info": {
+          "package_name": "me.micrusa.githubstats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349329437799-c3osjl6ccn52eekc1op5pl5bb5nc39or.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYMoVr7BwbFteQwUf-CUuaZAzetbPdbd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349329437799-c3osjl6ccn52eekc1op5pl5bb5nc39or.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
