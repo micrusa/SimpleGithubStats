@@ -47,7 +47,12 @@ public class SettingsActivity extends AppCompatActivity {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
             Preference checkForUpdates = findPreference(Constants.KEY_CHECKUPDT);
+            Preference appInfo = findPreference(Constants.KEY_APPINFO);
             checkForUpdates.setOnPreferenceClickListener(preference -> Updater.checkForUpdates(getContext()));
+            appInfo.setOnPreferenceClickListener(preference -> {
+                startActivity(new Intent(preference.getContext(), AppInfo.class));
+                return true;
+            });
         }
     }
 }
