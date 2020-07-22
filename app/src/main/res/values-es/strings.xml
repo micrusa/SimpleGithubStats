@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github Stats</string>
+    <string name="users">Usuarios</string>
+    <string name="repos">Repositorios</string>
+    <string name="stars">Estrellas</string>
+    <string name="watchers">Observadores</string>
+    <string name="issues">Problemas</string>
+    <string name="forks">Forks</string>
+    <string name="downloads">Descargas</string>
+    <string name="commits">Cambios</string>
+    <string name="followers">Seguidores</string>
+    <string name="username">Usuario</string>
+    <string name="repo">Repositorio</string>
+    <string name="save">Guardar</string>
+    <string name="invalidobject">Repositorio/Usuario inválido</string>
+    <string name="title_activity_settings">Ajustes</string>
+    <string name="cachetime">Tiempo de cache</string>
+    <string name="cachetimesum">Tiempo en segundos antes de llamar al API de GitHub. Valores bajos pueden provocar limitaciones</string>
+    <string name="settings">Ajustes</string>
+    <string name="update">¡Nueva actualización disponible! $v, descárgala en github</string>
+    <string name="noupdate">No hay actualizaciones disponibles</string>
+    <string name="updatefail">Fallo al buscar actualizaciones</string>
+    <string name="checkupdate">Buscar actualizaciones ahora</string>
+    <string name="checkupdatestart">Buscar actualizaciones en el inicio</string>
+    <string name="appinfo">Información</string>
+    <string name="failed">¡Fallo al obtener datos!</string>
+    <string name="releases">Versiones de $r</string>
+    <string name="tag">Etiqueta</string>
+</resources>
