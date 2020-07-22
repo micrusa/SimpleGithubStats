@@ -12,7 +12,7 @@ import me.micrusa.githubstats.R;
 
 public class Updater {
 
-    private static final String UPDATE_URL = "https://api.github.com/repos/micrusa/GithubStats/releases/latest";
+    private static final String UPDATE_URL = "https://api.github.com/repos/micrusa/SimpleGithubStats/releases/latest";
 
     public static boolean checkForUpdates(Context context){
         RequestsUtil.request(UPDATE_URL, (isSuccess, response) -> {
