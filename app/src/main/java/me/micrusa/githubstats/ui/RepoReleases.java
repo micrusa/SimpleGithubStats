@@ -35,7 +35,7 @@ public class RepoReleases extends AppCompatActivity {
         Repo repo = realm.where(Repo.class).equalTo(EXTRA_ID, id).findFirst();
 
         TextView name = findViewById(R.id.releases_repo_name);
-        name.setText(repo.getName());
+        name.setText(repo.getRepo());
 
         String URL = "https://api.github.com/repos/" + repo.getRepo() + "/releases";
         RequestsUtil.request(URL, (isSuccess, response) -> {
