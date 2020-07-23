@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 30
@@ -41,6 +42,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'com.google.firebase:firebase-analytics:17.4.4'
     implementation 'com.google.firebase:firebase-messaging:20.2.3'
+    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
     implementation("com.squareup.okhttp3:okhttp:4.8.0")
     runtimeOnly 'org.tinylog:tinylog-impl:2.1.2'
     testImplementation 'junit:junit:4.13'

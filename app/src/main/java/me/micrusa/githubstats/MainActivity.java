@@ -4,19 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.pixplicity.easyprefs.library.Prefs;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import org.tinylog.Logger;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.pixplicity.easyprefs.library.Prefs;
 
 import me.micrusa.githubstats.ui.SettingsActivity;
 import me.micrusa.githubstats.utils.Updater;
