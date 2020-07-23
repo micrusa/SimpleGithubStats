@@ -32,6 +32,7 @@
         <activity
             android:name=".ui.SettingsActivity"
             android:label="@string/title_activity_settings" />
+        <activity android:name=".ui.ReleasesAssets" />
         <activity android:name=".ui.newUserActivity" />
         <activity android:name=".ui.newRepoActivity" />
         <activity

@@ -9,12 +9,12 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class MainApplication extends Application {
-  
-  private static Application mApp;
-  
-  public static Application getApp(){
-    return mApp;
-  }
+
+    private static Application mApp;
+
+    public static Application getApp() {
+        return mApp;
+    }
 
     @Override
     public void onCreate() {
@@ -24,7 +24,7 @@ public class MainApplication extends Application {
         mApp = this;
     }
 
-    private void setupRealm(){
+    private void setupRealm() {
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
                 .name("GithubStats.realm")
@@ -33,7 +33,7 @@ public class MainApplication extends Application {
         Realm.setDefaultConfiguration(config);
     }
 
-    private void setupEasyprefs(){
+    private void setupEasyprefs() {
         new Prefs.Builder()
                 .setContext(this)
                 .setMode(ContextWrapper.MODE_PRIVATE)

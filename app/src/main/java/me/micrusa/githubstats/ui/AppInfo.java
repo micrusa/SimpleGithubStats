@@ -3,14 +3,13 @@ package me.micrusa.githubstats.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
 import me.micrusa.githubstats.BuildConfig;
 import me.micrusa.githubstats.R;
+import me.micrusa.githubstats.utils.utils;
 
 public class AppInfo extends AppCompatActivity {
 
@@ -27,17 +26,11 @@ public class AppInfo extends AppCompatActivity {
         Button paypal = findViewById(R.id.paypal);
 
         github.setOnClickListener(view -> {
-            openLink("https://github.com/micrusa/SimpleGithubStats");
+            utils.openLink("https://github.com/micrusa/SimpleGithubStats", this);
         });
 
         paypal.setOnClickListener(view -> {
-            openLink("https://www.paypal.me/migueelcs");
+            utils.openLink("https://www.paypal.me/migueelcs", this);
         });
-    }
-
-    private void openLink(String url){
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        startActivity(intent);
     }
 }

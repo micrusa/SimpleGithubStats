@@ -3,7 +3,7 @@
 A simple github stats app for checking users, repos and release stats
 
 ## Screenshots
-<img width="216" height="468" src="https://github.com/micrusa/SimpleGithubStats/raw/master/ss1.jpg"/><img width="216" height="468" src="https://github.com/micrusa/SimpleGithubStats/raw/master/ss2.jpg"/><img width="216" height="468" src="https://github.com/micrusa/SimpleGithubStats/raw/master/ss3.jpg"/>
+<img width="216" height="468" src="https://github.com/micrusa/SimpleGithubStats/raw/master/ss1.jpg"/><img width="216" height="468" src="https://github.com/micrusa/SimpleGithubStats/raw/master/ss2.jpg"/><img width="216" height="468" src="https://github.com/micrusa/SimpleGithubStats/raw/master/ss3.jpg"/><img width="216" height="468" src="https://github.com/micrusa/SimpleGithubStats/raw/master/ss4.jpg"/>
 
 ## How does it work?
 It uses Github API to get all data. To avoid being rate-limited it has a simple cache that gets updated when it haven't been checked for a time that you can select in settings

@@ -27,4 +27,6 @@
     <string name="failed">¡Fallo al obtener datos!</string>
     <string name="releases">Versiones de $r</string>
     <string name="tag">Etiqueta</string>
+    <string name="download">Descargar</string>
+    <string name="assets">"Archivos  "</string>
 </resources>

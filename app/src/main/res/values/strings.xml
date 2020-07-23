@@ -7,6 +7,8 @@
     <string name="issues">Issues</string>
     <string name="forks">Forks</string>
     <string name="downloads">Downloads</string>
+    <string name="download">Download</string>
+    <string name="assets">Assets  </string>
     <string name="commits">Commits</string>
     <string name="followers">Followers</string>
     <string name="username">Username</string>
