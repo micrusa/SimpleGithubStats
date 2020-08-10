@@ -56,11 +56,10 @@ public abstract class StatsData {
             try {
                 if(response != null)
                     newText = String.valueOf(response.get(JSONName));
-                text.setText(newText);
             } catch (JSONException e) {
-                text.setText(newText);
                 Logger.error(e);
             }
+            text.setText(newText);
         };
     }
 
