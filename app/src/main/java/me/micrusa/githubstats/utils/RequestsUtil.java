@@ -6,6 +6,8 @@ import android.os.Looper;
 
 import java.io.IOException;
 
+import org.tinylog.Logger;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -27,7 +29,7 @@ public class RequestsUtil {
                 String data = success ? response.body().string() : String.valueOf(response.code());
                 handler.post(() -> ResponseListener.onResponse(success, data));
             } catch (IOException e) {
-                e.printStackTrace();
+                Logger.error(e);
             }
         });
 
