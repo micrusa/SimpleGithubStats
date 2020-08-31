@@ -14,7 +14,6 @@ import me.micrusa.githubstats.utils.utils;
 public class RepoData extends StatsData {
 
     public RepoData(final Repo repo) {
-        super(repo);
         if(response != null) return;
 
         String url = "https://api.github.com/repos/" + repo.getRepo();
@@ -25,7 +24,6 @@ public class RepoData extends StatsData {
             if(!success) errorCode = Integer.parseInt(response);
             try {
                 RepoData.super.response = new JSONObject(response);
-                cache(repo, response);
             } catch(Exception ignored) {}
             runAll();
         });
@@ -45,14 +43,5 @@ public class RepoData extends StatsData {
 
     public void setWatchers(TextView text){
         super.setup(text, "watchers_count");
-    }
-
-    private void cache(Repo repo, String response){
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        Repo managedRepo = realm.where(Repo.class).equalTo("id", repo.getId()).findFirst();
-        managedRepo.setCachedResponse(response); //No possible NullPointerException because it's in the fragment
-        managedRepo.setLatestCache(System.currentTimeMillis());
-        realm.commitTransaction();
     }
 }

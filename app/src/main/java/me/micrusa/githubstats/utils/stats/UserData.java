@@ -14,7 +14,6 @@ import me.micrusa.githubstats.utils.utils;
 public class UserData extends StatsData {
 
     public UserData(final User user){
-        super(user);
         if(response != null) return;
 
         String url = "https://api.github.com/users/" + user.getName();
@@ -25,7 +24,6 @@ public class UserData extends StatsData {
             if(!success) errorCode = Integer.parseInt(response);
             try {
                 UserData.super.response = new JSONObject(response);
-                cache(user, response);
             } catch(Exception ignored) {}
             runAll();
         });
@@ -37,15 +35,6 @@ public class UserData extends StatsData {
 
     public void setRepos(TextView text){
         super.setup(text, "public_repos");
-    }
-
-    private void cache(User user, String response){
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        User managedUser = realm.where(User.class).equalTo("id", user.getId()).findFirst();
-        managedUser.setCachedResponse(response); //No possible NullPointerException because it's in the fragment
-        managedUser.setLatestCache(System.currentTimeMillis());
-        realm.commitTransaction();
     }
 
 }

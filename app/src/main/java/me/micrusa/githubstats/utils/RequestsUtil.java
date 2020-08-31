@@ -6,8 +6,15 @@ import android.os.Looper;
 
 import java.io.IOException;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.tinylog.Logger;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+import me.micrusa.githubstats.objects.realm.CachedRequest;
+import me.micrusa.githubstats.objects.realm.Repo;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -15,6 +22,20 @@ import okhttp3.Response;
 public class RequestsUtil {
 
     public static void request(String url, final OnResponseListener ResponseListener){
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<CachedRequest> cache = realm.where(CachedRequest.class).equalTo("url", url).findAll();
+        CachedRequest cachedRequest = null;
+        if(cache.size() >= 1){
+            cachedRequest = cache.get(0);
+            if(cachedRequest.getCachedResponse() != null && System.currentTimeMillis() - cachedRequest.getLatestCache() <= utils.getCacheTime()){
+                Logger.debug("Using cached data");
+                ResponseListener.onResponse(true, cachedRequest.getCachedResponse());
+                return;
+            }
+        }
+        CachedRequest finalCachedRequest = cachedRequest;
+
         if(Looper.myLooper() == null) Looper.prepare();
         Handler handler = new Handler(Looper.getMainLooper());
         Thread requestThread = new Thread(() -> {
@@ -27,6 +48,13 @@ public class RequestsUtil {
             try (Response response = client.newCall(request).execute()) {
                 boolean success = response.isSuccessful();
                 String data = success ? response.body().string() : String.valueOf(response.code());
+                if(success){
+                    realm.beginTransaction();
+                    CachedRequest newCache = finalCachedRequest == null ? realm.createObject(CachedRequest.class, url) : finalCachedRequest;
+                    newCache.setCachedResponse(data);
+                    newCache.setLatestCache(System.currentTimeMillis());
+                    realm.commitTransaction();
+                }
                 handler.post(() -> ResponseListener.onResponse(success, data));
             } catch (IOException e) {
                 Logger.error(e);

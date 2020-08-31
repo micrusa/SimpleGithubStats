@@ -36,12 +36,7 @@ public class UserFragment extends Fragment {
 
         //Setup button
         FloatingActionButton fab = root.findViewById(R.id.add_user);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), newUserActivity.class));
-            }
-        });
+        fab.setOnClickListener(view -> startActivity(new Intent(view.getContext(), newUserActivity.class)));
 
         return root;
     }

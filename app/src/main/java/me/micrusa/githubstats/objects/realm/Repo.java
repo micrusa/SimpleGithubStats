@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Repo extends RealmObject implements Cachable {
+public class Repo extends RealmObject {
     @PrimaryKey
     private String id;
 

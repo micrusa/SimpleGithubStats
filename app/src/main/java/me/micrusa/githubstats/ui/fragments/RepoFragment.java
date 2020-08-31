@@ -38,12 +38,7 @@ public class RepoFragment extends Fragment {
 
         //Setup button
         FloatingActionButton fab = root.findViewById(R.id.add_repo);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), newRepoActivity.class));
-            }
-        });
+        fab.setOnClickListener(view -> startActivity(new Intent(view.getContext(), newRepoActivity.class)));
 
         return root;
     }
