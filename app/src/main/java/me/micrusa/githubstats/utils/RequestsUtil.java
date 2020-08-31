@@ -54,7 +54,7 @@ public class RequestsUtil {
                 if(success){
                     Realm newRealm = Realm.getDefaultInstance();
                     newRealm.beginTransaction();
-                    CachedRequest newCache = finalCachedRequest == null ? newRealm.createObject(CachedRequest.class, url) : finalCachedRequest;
+                    CachedRequest newCache = finalCachedRequest == null ? newRealm.createObject(CachedRequest.class, url) : newRealm.where(CachedRequest.class).beginsWith("url", url).findFirst();
                     newCache.setCachedResponse(data);
                     newCache.setLatestCache(System.currentTimeMillis());
                     newRealm.commitTransaction();
