@@ -52,11 +52,12 @@ public class RequestsUtil {
                 boolean success = response.isSuccessful();
                 String data = success ? response.body().string() : String.valueOf(response.code());
                 if(success){
-                    realm.beginTransaction();
-                    CachedRequest newCache = finalCachedRequest == null ? realm.createObject(CachedRequest.class, url) : finalCachedRequest;
+                    Realm newRealm = Realm.getDefaultInstance();
+                    newRealm.beginTransaction();
+                    CachedRequest newCache = finalCachedRequest == null ? newRealm.createObject(CachedRequest.class, url) : finalCachedRequest;
                     newCache.setCachedResponse(data);
                     newCache.setLatestCache(System.currentTimeMillis());
-                    realm.commitTransaction();
+                    newRealm.commitTransaction();
                 }
 
                 if(data.equals("403")) //Rate-limited
