@@ -54,12 +54,13 @@ public class RequestsUtil {
                 if(success){
                     Realm newRealm = Realm.getDefaultInstance();
                     newRealm.beginTransaction();
-                    CachedRequest newCache = finalCachedRequest == null ? newRealm.createObject(CachedRequest.class, url) : newRealm.where(CachedRequest.class).beginsWith("url", url).findFirst();
+                    CachedRequest newCache = finalCachedRequest == null ? newRealm.createObject(CachedRequest.class, url) : newRealm.where(CachedRequest.class).equalTo("url", url).findFirst();
                     newCache.setCachedResponse(data);
                     newCache.setLatestCache(System.currentTimeMillis());
                     newRealm.commitTransaction();
                 }
 
+                if(Looper.myLooper() == null) Looper.prepare();
                 if(data.equals("403")) //Rate-limited
                     Toast.makeText(MainApplication.getApp().getApplicationContext(), R.string.ratelimited, Toast.LENGTH_SHORT).show();
                 handler.post(() -> ResponseListener.onResponse(success, data));
