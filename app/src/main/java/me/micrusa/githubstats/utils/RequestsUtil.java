@@ -3,6 +3,7 @@ package me.micrusa.githubstats.utils;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -12,6 +13,8 @@ import org.tinylog.Logger;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import me.micrusa.githubstats.MainApplication;
+import me.micrusa.githubstats.R;
 import me.micrusa.githubstats.objects.realm.CachedRequest;
 import me.micrusa.githubstats.objects.realm.Repo;
 import okhttp3.Cache;
@@ -55,6 +58,9 @@ public class RequestsUtil {
                     newCache.setLatestCache(System.currentTimeMillis());
                     realm.commitTransaction();
                 }
+
+                if(data.equals("403")) //Rate-limited
+                    Toast.makeText(MainApplication.getApp().getApplicationContext(), R.string.ratelimited, Toast.LENGTH_SHORT).show();
                 handler.post(() -> ResponseListener.onResponse(success, data));
             } catch (IOException e) {
                 Logger.error(e);
