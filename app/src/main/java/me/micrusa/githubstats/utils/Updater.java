@@ -18,7 +18,8 @@ public class Updater {
         RequestsUtil.request(UPDATE_URL, (isSuccess, response) -> {
             if (!isSuccess){
                 Logger.error("Failed checking for updates with response code " + response);
-                Toast.makeText(context, context.getResources().getString(R.string.updatefail), Toast.LENGTH_LONG).show();
+                if(!response.equals("403"))
+                    Toast.makeText(context, context.getResources().getString(R.string.updatefail), Toast.LENGTH_LONG).show();
                 return;
             } else if (context == null){
                 Logger.error("Null context!");
