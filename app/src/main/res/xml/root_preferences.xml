@@ -8,7 +8,7 @@
         app:defaultValue="3600"
         app:adjustable="true"
         app:min="30"
-        android:max="360000"
+        android:max="36000"
         app:summary="@string/cachetimesum"
         app:title="@string/cachetime"
         app:updatesContinuously="true" />
