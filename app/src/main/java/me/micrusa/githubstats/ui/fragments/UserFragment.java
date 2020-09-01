@@ -23,21 +23,34 @@ import me.micrusa.githubstats.ui.newUserActivity;
 
 public class UserFragment extends Fragment {
 
+    private ListView users;
+    private View root;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_users, container, false);
+        root = inflater.inflate(R.layout.fragment_users, container, false);
 
-        //Set all users from realm DB
-        Realm realm = Realm.getDefaultInstance();
-        final RealmResults<User> usersRealm = realm.where(User.class).findAll();
-        UserAdapter userAdapter = new UserAdapter(root.getContext(), new ArrayList<>(usersRealm));
-        ListView users = root.findViewById(R.id.list_users);
-        users.setAdapter(userAdapter);
+        users = root.findViewById(R.id.list_users);
+        loadListView();
 
         //Setup button
         FloatingActionButton fab = root.findViewById(R.id.add_user);
         fab.setOnClickListener(view -> startActivity(new Intent(view.getContext(), newUserActivity.class)));
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        loadListView();
+    }
+
+    private void loadListView(){
+        Realm realm = Realm.getDefaultInstance();
+        final RealmResults<User> usersRealm = realm.where(User.class).findAll();
+        UserAdapter userAdapter = new UserAdapter(root.getContext(), new ArrayList<>(usersRealm));
+        users.setAdapter(userAdapter);
     }
 }

@@ -25,21 +25,34 @@ import me.micrusa.githubstats.ui.newRepoActivity;
 
 public class RepoFragment extends Fragment {
 
+    private ListView users;
+    private View root;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_repos, container, false);
+        root = inflater.inflate(R.layout.fragment_repos, container, false);
 
-        //Set all users from realm DB
-        Realm realm = Realm.getDefaultInstance();
-        final RealmResults<Repo> reposRealm = realm.where(Repo.class).findAll();
-        RepoAdapter repoAdapter = new RepoAdapter(root.getContext(), new ArrayList<>(reposRealm));
-        ListView users = root.findViewById(R.id.list_repos);
-        users.setAdapter(repoAdapter);
+        users = root.findViewById(R.id.list_repos);
+        loadListView();
 
         //Setup button
         FloatingActionButton fab = root.findViewById(R.id.add_repo);
         fab.setOnClickListener(view -> startActivity(new Intent(view.getContext(), newRepoActivity.class)));
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        loadListView();
+    }
+
+    private void loadListView(){
+        Realm realm = Realm.getDefaultInstance();
+        final RealmResults<Repo> reposRealm = realm.where(Repo.class).findAll();
+        RepoAdapter repoAdapter = new RepoAdapter(root.getContext(), new ArrayList<>(reposRealm));
+        users.setAdapter(repoAdapter);
     }
 }
