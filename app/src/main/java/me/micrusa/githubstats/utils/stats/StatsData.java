@@ -18,10 +18,6 @@ public abstract class StatsData {
     public boolean exists(){
         return errorCode != 404;
     }
-    
-    public boolean isRateLimited(){
-        return errorCode == 403;
-    }
 
     public void addRunnable(Runnable r){
         if(response != null) {
