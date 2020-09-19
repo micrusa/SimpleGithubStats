@@ -44,6 +44,7 @@ public class UserAdapter extends ArrayAdapter<User> {
             UserAdapter.super.remove(user);
             user.deleteFromRealm();
             realm.commitTransaction();
+            realm.close();
             notifyDataSetChanged();
             return true;
         });

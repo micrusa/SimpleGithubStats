@@ -52,6 +52,7 @@ public class RepoFragment extends Fragment {
     private void loadListView(){
         Realm realm = Realm.getDefaultInstance();
         final RealmResults<Repo> reposRealm = realm.where(Repo.class).findAll();
+        realm.close();
         RepoAdapter repoAdapter = new RepoAdapter(root.getContext(), new ArrayList<>(reposRealm));
         users.setAdapter(repoAdapter);
     }

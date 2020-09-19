@@ -50,6 +50,7 @@ public class RepoAdapter extends ArrayAdapter<Repo> {
             RepoAdapter.super.remove(repo);
             repo.deleteFromRealm();
             realm.commitTransaction();
+            realm.close();
             notifyDataSetChanged();
             return true;
         });

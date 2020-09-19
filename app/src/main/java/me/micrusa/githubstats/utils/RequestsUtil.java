@@ -49,6 +49,7 @@ public class RequestsUtil {
                     newCache.setCachedResponse(data);
                     newCache.setLatestCache(System.currentTimeMillis());
                     newRealm.commitTransaction();
+                    newRealm.close();
                 }
 
                 if(Looper.myLooper() == null) Looper.prepare();

@@ -46,6 +46,7 @@ public class newUserActivity extends AppCompatActivity {
                     if(!realm.isInTransaction()) realm.beginTransaction();
                     realm.copyToRealm(nonManagedUser);
                     realm.commitTransaction();
+                    realm.close();
 
                     finish();
                 }
