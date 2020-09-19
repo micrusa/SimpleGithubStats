@@ -1,23 +1,17 @@
 package me.micrusa.githubstats.utils;
 
-import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
-import java.io.IOException;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.tinylog.Logger;
 
+import java.io.IOException;
+
 import io.realm.Realm;
-import io.realm.RealmResults;
 import me.micrusa.githubstats.MainApplication;
 import me.micrusa.githubstats.R;
 import me.micrusa.githubstats.objects.realm.CachedRequest;
-import me.micrusa.githubstats.objects.realm.Repo;
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -27,17 +21,12 @@ public class RequestsUtil {
     public static void request(String url, final OnResponseListener ResponseListener){
 
         Realm realm = Realm.getDefaultInstance();
-        RealmResults<CachedRequest> cache = realm.where(CachedRequest.class).equalTo("url", url).findAll();
-        CachedRequest cachedRequest = null;
-        if(cache.size() >= 1){
-            cachedRequest = cache.get(0);
-            if(cachedRequest.getCachedResponse() != null && System.currentTimeMillis() - cachedRequest.getLatestCache() <= utils.getCacheTime()){
-                Logger.debug("Using cached data");
-                ResponseListener.onResponse(true, cachedRequest.getCachedResponse());
-                return;
-            }
+        CachedRequest cachedRequest = realm.where(CachedRequest.class).equalTo("url", url).findFirst();
+        if (cachedRequest.getCachedResponse() != null && System.currentTimeMillis() - cachedRequest.getLatestCache() <= utils.getCacheTime()) {
+            Logger.debug("Using cached data");
+            ResponseListener.onResponse(true, cachedRequest.getCachedResponse());
+            return;
         }
-        CachedRequest finalCachedRequest = cachedRequest;
 
         if(Looper.myLooper() == null) Looper.prepare();
         Handler handler = new Handler(Looper.getMainLooper());
@@ -45,8 +34,7 @@ public class RequestsUtil {
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
-                    .url(url)
-                    .build();
+                    .url(url).build();
 
             try (Response response = client.newCall(request).execute()) {
                 boolean success = response.isSuccessful();
@@ -54,7 +42,7 @@ public class RequestsUtil {
                 if(success){
                     Realm newRealm = Realm.getDefaultInstance();
                     newRealm.beginTransaction();
-                    CachedRequest newCache = finalCachedRequest == null ? newRealm.createObject(CachedRequest.class, url) : newRealm.where(CachedRequest.class).equalTo("url", url).findFirst();
+                    CachedRequest newCache = cachedRequest == null ? newRealm.createObject(CachedRequest.class, url) : newRealm.where(CachedRequest.class).equalTo("url", url).findFirst();
                     newCache.setCachedResponse(data);
                     newCache.setLatestCache(System.currentTimeMillis());
                     newRealm.commitTransaction();
