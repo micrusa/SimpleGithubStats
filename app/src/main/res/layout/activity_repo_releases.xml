@@ -19,6 +19,8 @@
         android:id="@+id/listReleases"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +29,7 @@
     <TextView
         android:id="@+id/releases_repo_name"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"

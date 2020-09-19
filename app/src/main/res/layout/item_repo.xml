@@ -63,7 +63,7 @@
     <TextView
         android:id="@+id/repo_name"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:drawableStart="@drawable/baseline_grade_black_18dp"
         android:text="@string/stars"
         android:textColor="@android:color/black"

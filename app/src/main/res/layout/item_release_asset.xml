@@ -42,7 +42,7 @@
     <TextView
         android:id="@+id/asset_name"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:drawableStart="@drawable/round_get_app_black_18dp"
         android:text="@string/downloads"
         android:textColor="@android:color/black"
