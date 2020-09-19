@@ -19,10 +19,13 @@ import okhttp3.Response;
 public class RequestsUtil {
 
     public static void request(String url, final OnResponseListener ResponseListener){
+        request(url, ResponseListener, true);
+    }
 
+    public static void request(String url, final OnResponseListener ResponseListener, boolean useCachedData){
         Realm realm = Realm.getDefaultInstance();
         CachedRequest cachedRequest = realm.where(CachedRequest.class).equalTo("url", url).findFirst();
-        if (cachedRequest.getCachedResponse() != null && System.currentTimeMillis() - cachedRequest.getLatestCache() <= utils.getCacheTime()) {
+        if (useCachedData && cachedRequest.getCachedResponse() != null && System.currentTimeMillis() - cachedRequest.getLatestCache() <= utils.getCacheTime()) {
             Logger.debug("Using cached data");
             ResponseListener.onResponse(true, cachedRequest.getCachedResponse());
             return;

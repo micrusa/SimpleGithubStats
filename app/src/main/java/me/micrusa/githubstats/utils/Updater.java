@@ -41,7 +41,7 @@ public class Updater {
             } catch (JSONException e) {
                 Logger.error(e);
             }
-        });
+        }, false);
         return true;
     }
 }
