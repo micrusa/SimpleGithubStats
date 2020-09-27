@@ -1,5 +1,6 @@
 package me.micrusa.githubstats.utils;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
@@ -25,17 +26,19 @@ public class RequestsUtil {
     public static void request(String url, final OnResponseListener ResponseListener, boolean useCachedData){
         Realm realm = Realm.getDefaultInstance();
         CachedRequest cachedRequest = realm.where(CachedRequest.class).equalTo("url", url).findFirst();
-        if (useCachedData && cachedRequest != null && cachedRequest.getCachedResponse() != null && System.currentTimeMillis() - cachedRequest.getLatestCache() <= utils.getCacheTime()) {
+        if (useCachedData && isCacheValid(cachedRequest)) {
             Logger.debug("Using cached data");
             ResponseListener.onResponse(true, cachedRequest.getCachedResponse());
-            return;
+        } else {
+            makeRequest(url, ResponseListener, cachedRequest);
         }
+    }
 
-        if(Looper.myLooper() == null) Looper.prepare();
+    private static void makeRequest(String url, OnResponseListener listener, CachedRequest cachedRequest){
+        prepareLooper();
         Handler handler = new Handler(Looper.getMainLooper());
-        Thread requestThread = new Thread(() -> {
+        new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
-
             Request request = new Request.Builder()
                     .url(url).build();
 
@@ -52,16 +55,36 @@ public class RequestsUtil {
                     newRealm.close();
                 }
 
-                if(Looper.myLooper() == null) Looper.prepare();
-                if(data.equals("403")) //Rate-limited
-                    Toast.makeText(MainApplication.getApp().getApplicationContext(), R.string.ratelimited, Toast.LENGTH_SHORT).show();
-                handler.post(() -> ResponseListener.onResponse(success, data));
+                checkForErrors(data);
+                handler.post(() -> listener.onResponse(success, data));
             } catch (IOException e) {
                 Logger.error(e);
             }
-        });
+        }).start();
+    }
 
-        requestThread.start();
+    private static void checkForErrors(String data){
+        Context context = MainApplication.getApp().getApplicationContext();
+        switch(data){
+            case "403": //Rate-limited
+                Toast.makeText(context, R.string.ratelimited, Toast.LENGTH_SHORT).show();
+                break;
+            case "500":
+            case "502":
+            case "503":
+                Toast.makeText(context, context.getString(R.string.servererror, data), Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static boolean isCacheValid(CachedRequest cachedRequest){
+        return cachedRequest != null && cachedRequest.getCachedResponse() != null && System.currentTimeMillis() - cachedRequest.getLatestCache() <= utils.getCacheTime();
+    }
+
+    private static void prepareLooper(){
+        if(Looper.myLooper() == null) Looper.prepare();
     }
 
     public interface OnResponseListener{
