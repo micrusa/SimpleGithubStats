@@ -8,12 +8,27 @@ import org.tinylog.Logger;
 
 import java.util.ArrayList;
 
+import me.micrusa.githubstats.utils.RequestsUtil;
+
 public abstract class StatsData {
 
     protected boolean success;
     protected JSONObject response;
     protected int errorCode;
     protected ArrayList<Runnable> runOnResponse = new ArrayList<>();
+
+    protected StatsData(String url){
+        RequestsUtil.request(url, (isSuccess, response) -> {
+            Logger.debug("Received response");
+            success = isSuccess;
+            if(!success)
+                errorCode = Integer.parseInt(response);
+            try {
+                this.response = new JSONObject(response);
+            } catch(Exception ignored) {}
+            runAll();
+        });
+    }
 
     public boolean exists(){
         return errorCode != 404;

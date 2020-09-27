@@ -14,19 +14,7 @@ import me.micrusa.githubstats.utils.utils;
 public class UserData extends StatsData {
 
     public UserData(final User user){
-        if(response != null) return;
-
-        String url = "https://api.github.com/users/" + user.getName();
-
-        RequestsUtil.request(url, (isSuccess, response) -> {
-            Logger.debug("Received response");
-            success = isSuccess;
-            if(!success) errorCode = Integer.parseInt(response);
-            try {
-                UserData.super.response = new JSONObject(response);
-            } catch(Exception ignored) {}
-            runAll();
-        });
+        super("https://api.github.com/users/" + user.getName());
     }
 
     public void setFollowers(TextView text){

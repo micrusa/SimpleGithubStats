@@ -14,19 +14,7 @@ import me.micrusa.githubstats.utils.utils;
 public class RepoData extends StatsData {
 
     public RepoData(final Repo repo) {
-        if(response != null) return;
-
-        String url = "https://api.github.com/repos/" + repo.getRepo();
-
-        RequestsUtil.request(url, (isSuccess, response) -> {
-            Logger.debug("Received response");
-            success = isSuccess;
-            if(!success) errorCode = Integer.parseInt(response);
-            try {
-                RepoData.super.response = new JSONObject(response);
-            } catch(Exception ignored) {}
-            runAll();
-        });
+        super("https://api.github.com/repos/" + repo.getRepo());
     }
 
     public void setStars(TextView text){
