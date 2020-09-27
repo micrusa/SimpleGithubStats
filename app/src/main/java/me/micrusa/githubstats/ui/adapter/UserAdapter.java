@@ -22,9 +22,9 @@ public class UserAdapter extends ArrayAdapter<User> {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
+
         final User user = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
+
         if (convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_user, parent, false);
 

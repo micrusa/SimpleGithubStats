@@ -29,4 +29,5 @@
     <string name="releases">$r\'s releases</string>
     <string name="tag">Tag</string>
     <string name="ratelimited">You\'re being rate-limited!</string>
+    <string name="servererror">Servers are unavailable now (Error code: %s)</string>
 </resources>

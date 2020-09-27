@@ -11,17 +11,6 @@ public class Repo extends RealmObject {
 
     private String author;
     private String name;
-    //Cached items
-    private String cachedResponse;
-    private long latestCache;
-
-    public long getLatestCache(){
-        return latestCache;
-    }
-
-    public void setLatestCache(long time){
-        latestCache = time;
-    }
 
     public String getId() {
         return id;
@@ -49,14 +38,6 @@ public class Repo extends RealmObject {
 
     public String getRepo(){
         return author + "/" + name;
-    }
-
-    public String getCachedResponse() {
-        return cachedResponse;
-    }
-
-    public void setCachedResponse(String cachedResponse) {
-        this.cachedResponse = cachedResponse;
     }
 
 }

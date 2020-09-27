@@ -30,4 +30,5 @@
     <string name="download">Descargar</string>
     <string name="assets">"Archivos  "</string>
     <string name="ratelimited">¡Estás siendo limitado!</string>
+    <string name="servererror">Los servidores no se encuentran disponibles (Error: %s)</string>
 </resources>

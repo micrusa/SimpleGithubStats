@@ -28,7 +28,8 @@ public class MainApplication extends Application {
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
                 .name("GithubStats.realm")
-                .schemaVersion(2)
+                .schemaVersion(3)
+                .migration(new RealmMigration())
                 .build();
         Realm.setDefaultConfiguration(config);
     }
