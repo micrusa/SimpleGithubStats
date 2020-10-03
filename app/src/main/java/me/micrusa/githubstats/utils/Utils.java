@@ -8,7 +8,7 @@ import com.pixplicity.easyprefs.library.Prefs;
 
 import me.micrusa.githubstats.Constants;
 
-public class utils {
+public class Utils {
 
     public static boolean isNull(String string){
         return string == null || string.equals("");
@@ -22,5 +22,9 @@ public class utils {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         context.startActivity(intent);
+    }
+
+    public static String capitalizeFirst(String s){
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
 }

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import me.micrusa.githubstats.BuildConfig;
 import me.micrusa.githubstats.R;
-import me.micrusa.githubstats.utils.utils;
+import me.micrusa.githubstats.utils.Utils;
 
 public class AppInfo extends AppCompatActivity {
 
@@ -26,11 +26,11 @@ public class AppInfo extends AppCompatActivity {
         Button paypal = findViewById(R.id.paypal);
 
         github.setOnClickListener(view -> {
-            utils.openLink("https://github.com/micrusa/SimpleGithubStats", this);
+            Utils.openLink("https://github.com/micrusa/SimpleGithubStats", this);
         });
 
         paypal.setOnClickListener(view -> {
-            utils.openLink("https://www.paypal.me/migueelcs", this);
+            Utils.openLink("https://www.paypal.me/migueelcs", this);
         });
     }
 }

@@ -34,29 +34,30 @@ public class ReleaseAdapter extends ArrayAdapter<RepoRelease> {
     public View getView(int position, View convertView, ViewGroup parent) {
         final RepoRelease release = getItem(position);
 
-        if (convertView == null)
+        if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_release, parent, false);
 
-        init(convertView);
-        name.setText(release.getName());
-        tag.setText(release.getTag());
-        try {
-            int downloadsNo = 0;
-            for(int i = 0; i < release.getAssets().length(); i++){
-                JSONObject object = release.getAssets().getJSONObject(i);
-                downloadsNo += (int) object.get("download_count");
+            init(convertView);
+            name.setText(release.getName());
+            tag.setText(release.getTag());
+            try {
+                int downloadsNo = 0;
+                for (int i = 0; i < release.getAssets().length(); i++) {
+                    JSONObject object = release.getAssets().getJSONObject(i);
+                    downloadsNo += (int) object.get("download_count");
+                }
+                downloads.setText(String.valueOf(downloadsNo));
+            } catch (JSONException e) {
+                Logger.error(e);
             }
-            downloads.setText(String.valueOf(downloadsNo));
-        } catch (JSONException e) {
-            Logger.error(e);
-        }
 
-        download.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), ReleasesAssets.class);
-            intent.putExtra(ReleasesAssets.EXTRA_ASSETS, release.getAssets().toString());
-            intent.putExtra(ReleasesAssets.EXTRA_NAME, release.getName());
-            v.getContext().startActivity(intent);
-        });
+            download.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), ReleasesAssets.class);
+                intent.putExtra(ReleasesAssets.EXTRA_ASSETS, release.getAssets().toString());
+                intent.putExtra(ReleasesAssets.EXTRA_NAME, release.getName());
+                v.getContext().startActivity(intent);
+            });
+        }
 
         return convertView;
     }

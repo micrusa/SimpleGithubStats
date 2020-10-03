@@ -13,6 +13,7 @@ import io.realm.Realm;
 import me.micrusa.githubstats.R;
 import me.micrusa.githubstats.objects.realm.User;
 import me.micrusa.githubstats.utils.stats.UserData;
+import me.micrusa.githubstats.utils.Utils;
 
 public class UserAdapter extends ArrayAdapter<User> {
 
@@ -22,32 +23,32 @@ public class UserAdapter extends ArrayAdapter<User> {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-
         final User user = getItem(position);
 
-        if (convertView == null)
+        if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_user, parent, false);
 
-        TextView name = convertView.findViewById(R.id.user_name);
-        name.setText(user.getName().substring(0, 1).toUpperCase() + user.getName().substring(1));
+            TextView name = convertView.findViewById(R.id.user_name);
+            name.setText(Utils.capitalizeFirst(user.getName()));
 
-        UserData data = new UserData(user);
+            UserData data = new UserData(user);
 
-        TextView followers = convertView.findViewById(R.id.user_followers);
-        data.setFollowers(followers);
-        TextView repos = convertView.findViewById(R.id.user_repos);
-        data.setRepos(repos);
+            TextView followers = convertView.findViewById(R.id.user_followers);
+            data.setFollowers(followers);
+            TextView repos = convertView.findViewById(R.id.user_repos);
+            data.setRepos(repos);
 
-        convertView.setOnLongClickListener(view -> {
-            Realm realm = Realm.getDefaultInstance();
-            if (!realm.isInTransaction()) realm.beginTransaction();
-            UserAdapter.super.remove(user);
-            user.deleteFromRealm();
-            realm.commitTransaction();
-            realm.close();
-            notifyDataSetChanged();
-            return true;
-        });
+            convertView.setOnLongClickListener(view -> {
+                Realm realm = Realm.getDefaultInstance();
+                if (!realm.isInTransaction()) realm.beginTransaction();
+                UserAdapter.super.remove(user);
+                user.deleteFromRealm();
+                realm.commitTransaction();
+                realm.close();
+                notifyDataSetChanged();
+                return true;
+            });
+        }
 
         return convertView;
     }

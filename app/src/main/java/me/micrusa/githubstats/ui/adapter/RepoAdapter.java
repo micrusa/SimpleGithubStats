@@ -31,35 +31,36 @@ public class RepoAdapter extends ArrayAdapter<Repo> {
 
         final Repo repo = getItem(position);
 
-        if (convertView == null)
+        if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_repo, parent, false);
 
-        init(convertView);
+            init(convertView);
 
-        name.setText(repo.getRepo());
+            name.setText(repo.getRepo());
 
-        RepoData data = new RepoData(repo);
-        data.setStars(stars);
-        data.setIssues(issues);
-        data.setForks(forks);
-        data.setWatchers(watchers);
+            RepoData data = new RepoData(repo);
+            data.setStars(stars);
+            data.setIssues(issues);
+            data.setForks(forks);
+            data.setWatchers(watchers);
 
-        convertView.setOnLongClickListener(view -> {
-            Realm realm = Realm.getDefaultInstance();
-            if (!realm.isInTransaction()) realm.beginTransaction();
-            RepoAdapter.super.remove(repo);
-            repo.deleteFromRealm();
-            realm.commitTransaction();
-            realm.close();
-            notifyDataSetChanged();
-            return true;
-        });
+            convertView.setOnLongClickListener(view -> {
+                Realm realm = Realm.getDefaultInstance();
+                if (!realm.isInTransaction()) realm.beginTransaction();
+                RepoAdapter.super.remove(repo);
+                repo.deleteFromRealm();
+                realm.commitTransaction();
+                realm.close();
+                notifyDataSetChanged();
+                return true;
+            });
 
-        convertView.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), RepoReleases.class);
-            intent.putExtra(RepoReleases.EXTRA_ID, repo.getId());
-            view.getContext().startActivity(intent);
-        });
+            convertView.setOnClickListener(view -> {
+                Intent intent = new Intent(view.getContext(), RepoReleases.class);
+                intent.putExtra(RepoReleases.EXTRA_ID, repo.getId());
+                view.getContext().startActivity(intent);
+            });
+        }
 
         return convertView;
     }

@@ -80,7 +80,7 @@ public class RequestsUtil {
     }
 
     private static boolean isCacheValid(CachedRequest cachedRequest){
-        return cachedRequest != null && cachedRequest.getCachedResponse() != null && System.currentTimeMillis() - cachedRequest.getLatestCache() <= utils.getCacheTime();
+        return cachedRequest != null && cachedRequest.getCachedResponse() != null && System.currentTimeMillis() - cachedRequest.getLatestCache() <= Utils.getCacheTime();
     }
 
     private static void prepareLooper(){

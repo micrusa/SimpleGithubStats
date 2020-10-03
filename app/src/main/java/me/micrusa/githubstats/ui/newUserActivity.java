@@ -3,7 +3,6 @@ package me.micrusa.githubstats.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,7 +13,7 @@ import io.realm.Realm;
 import me.micrusa.githubstats.R;
 import me.micrusa.githubstats.objects.realm.User;
 import me.micrusa.githubstats.utils.stats.UserData;
-import me.micrusa.githubstats.utils.utils;
+import me.micrusa.githubstats.utils.Utils;
 
 public class newUserActivity extends AppCompatActivity {
 
@@ -38,7 +37,7 @@ public class newUserActivity extends AppCompatActivity {
             final UserData data = new UserData(nonManagedUser);
 
             data.addRunnable(() -> {
-                if (utils.isNull(sUser) || !data.exists()) {
+                if (Utils.isNull(sUser) || !data.exists()) {
                     Toast.makeText(view.getContext(), R.string.invalidobject, Toast.LENGTH_SHORT).show();
                 } else {
                     Realm realm = Realm.getDefaultInstance();

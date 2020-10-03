@@ -12,8 +12,7 @@ import java.util.ArrayList;
 
 import me.micrusa.githubstats.R;
 import me.micrusa.githubstats.objects.ReleaseAsset;
-import me.micrusa.githubstats.objects.RepoRelease;
-import me.micrusa.githubstats.utils.utils;
+import me.micrusa.githubstats.utils.Utils;
 
 public class AssetAdapter extends ArrayAdapter<ReleaseAsset> {
 
@@ -28,13 +27,14 @@ public class AssetAdapter extends ArrayAdapter<ReleaseAsset> {
     public View getView(int position, View convertView, ViewGroup parent) {
         final ReleaseAsset asset = getItem(position);
 
-        if (convertView == null)
+        if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_release_asset, parent, false);
-        init(convertView);
+            init(convertView);
 
-        name.setText(asset.getName());
-        downloads.setText(String.valueOf(asset.getDownloads()));
-        download.setOnClickListener(v -> utils.openLink(asset.getDownloadURL(), v.getContext()));
+            name.setText(asset.getName());
+            downloads.setText(String.valueOf(asset.getDownloads()));
+            download.setOnClickListener(v -> Utils.openLink(asset.getDownloadURL(), v.getContext()));
+        }
 
         return convertView;
     }

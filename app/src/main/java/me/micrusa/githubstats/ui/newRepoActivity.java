@@ -3,7 +3,6 @@ package me.micrusa.githubstats.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,7 +13,7 @@ import io.realm.Realm;
 import me.micrusa.githubstats.R;
 import me.micrusa.githubstats.objects.realm.Repo;
 import me.micrusa.githubstats.utils.stats.RepoData;
-import me.micrusa.githubstats.utils.utils;
+import me.micrusa.githubstats.utils.Utils;
 
 public class newRepoActivity extends AppCompatActivity {
 
@@ -40,7 +39,7 @@ public class newRepoActivity extends AppCompatActivity {
 
             final RepoData repoData = new RepoData(nonManagedRepo);
             repoData.addRunnable(() -> {
-                if (utils.isNull(sUser) || utils.isNull(sRepo) || !repoData.exists()) {
+                if (Utils.isNull(sUser) || Utils.isNull(sRepo) || !repoData.exists()) {
                     Toast.makeText(view.getContext(), R.string.invalidobject, Toast.LENGTH_SHORT).show();
                 } else {
                     Realm realm = Realm.getDefaultInstance();
